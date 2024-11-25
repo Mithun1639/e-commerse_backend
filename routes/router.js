@@ -11,6 +11,7 @@ const fs = require("fs");
 const secretKey = `${process.env.KEY}`;
 const BASE_URL = process.env.BASE_URL;
 const PASS = process.env.PASS;
+const FRONT_URL=process.env.FRONT_URL;
 
 //email configaration
 const transporter = nodemailer.createTransport({
@@ -286,7 +287,7 @@ router.post("/sendpasswordlink", async (req, res) => {
         from: "mithunreddy011@gmail.com",
         to: mail,
         subject: "Reset Password", ///forgotpassword/:id/:token
-        text: `http://localhost:3000/forgotpassword/${userFind.id}/${setusertoken.verifytoken}`,
+        text: `${FRONT_URL}/forgotpassword/${userFind.id}/${setusertoken.verifytoken}`,
       };
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
