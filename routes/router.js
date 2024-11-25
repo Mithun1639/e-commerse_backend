@@ -107,6 +107,9 @@ router.post("/login", async (req, res) => {
           path: '***/***'
         });
 
+        console.log(secure);
+        console.log("cookie below line");
+
         const result = {
           userLogin,
           token,
