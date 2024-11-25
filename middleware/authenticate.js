@@ -5,6 +5,7 @@ const secretKey = process.env.KEY;
 const athenticate = async (req, res, next) => {
   try {
     const token = req.cookies.amazonWeb;
+    console.log(token);
 
     const verifyToken = jwt.verify(token, secretKey);
 
@@ -17,7 +18,6 @@ const athenticate = async (req, res, next) => {
     req.token = token;
     req.rootUser = rootUser;
     req.userID = rootUser._id;
-
     next();
   } catch (error) {
     res.status(401).send("unautherized:No token provided");
