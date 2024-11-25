@@ -89,21 +89,21 @@ router.post("/login", async (req, res) => {
   } else {
     try {
       const userLogin = await USER.findOne({ email: email });
-      console.log(userLogin);
+      // console.log(userLogin);
       if (userLogin) {
         const isMatch = await bcrypt.compare(password, userLogin.password);
         console.log(isMatch);
 
         //token generate
         const token = await userLogin.generateAuthToken();
-        console.log(token);
+        // console.log(token);
 
         res.cookie("amazonWeb", token, {
           expires: new Date(Date.now() + 900000),
           httpOnly: true,
           secure: process.env.NODE_ENV === "production" ? true : false,
           sameSite: "Lax",
-          domain: "http://localhost:3000", // Ensure this matches your actual domain 
+          domain: "https://golden-queijadas-d9b5e0.netlify.app", // Ensure this matches your actual domain 
           path: '***/***'
         });
 
