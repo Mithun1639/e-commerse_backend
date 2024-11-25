@@ -11,7 +11,7 @@ const fs = require("fs");
 const secretKey = `${process.env.KEY}`;
 const BASE_URL = process.env.BASE_URL;
 const PASS = process.env.PASS;
-const FRONT_URL=process.env.FRONT_URL;
+const FRONT_URL = process.env.FRONT_URL;
 
 //email configaration
 const transporter = nodemailer.createTransport({
@@ -100,7 +100,11 @@ router.post("/login", async (req, res) => {
 
         res.cookie("amazonWeb", token, {
           expires: new Date(Date.now() + 900000),
-          // httpOnly: true,
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production" ? true : false,
+          sameSite: "Lax",
+          domain: "http://localhost:3000", // Ensure this matches your actual domain 
+          path: '***/***'
         });
 
         const result = {
@@ -261,7 +265,6 @@ router.get("/exporttocsv", athenticate, async (req, res) => {
 //send email link for reset password
 
 router.post("/sendpasswordlink", async (req, res) => {
-
   const { mail } = req.body;
   if (!mail) {
     res.status(401).json({ status: 401, message: "Enter your email" });
