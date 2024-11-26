@@ -102,13 +102,11 @@ router.post("/login", async (req, res) => {
           expires: new Date(Date.now() + 900000),
           httpOnly: true,
           // secure: process.env.NODE_ENV === "production" ? true : false,
-          sameSite: "Lax",
-          domain: "http://localhost:3000", // Ensure this matches your actual domain 
-          path: '***/***'
+          // sameSite: "Lax",
+          // domain: "http://localhost:3000", // Ensure this matches your actual domain 
+          // path: '***/***'
         });
-
-        console.log(secure);
-        console.log("cookie below line");
+        console.log("cookie line");
 
         const result = {
           userLogin,
