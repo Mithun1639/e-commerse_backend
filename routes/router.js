@@ -101,9 +101,9 @@ router.post("/login", async (req, res) => {
         res.cookie("amazonWeb", token, {
           expires: new Date(Date.now() + 900000),
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production" ? true : false,
+          // secure: process.env.NODE_ENV === "production" ? true : false,
           sameSite: "Lax",
-          domain: "https://golden-queijadas-d9b5e0.netlify.app", // Ensure this matches your actual domain 
+          domain: "http://localhost:3000", // Ensure this matches your actual domain 
           path: '***/***'
         });
 
